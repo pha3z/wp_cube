@@ -1,4 +1,4 @@
-# wp_cube
+# wp_cubix
 A containerized WordPress build using composer for automatic updates and version management.
 
 ## Features & Benefits
