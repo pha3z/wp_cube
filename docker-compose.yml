@@ -1,0 +1,21 @@
+version: '1.0'
+services:
+  wordpress:
+    image: wp-cubix
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /opt/wp-cubix/my-wordpress-site/uploads:/var/www/html/wp-content/uploads
+      - /opt/wp-cubix/my-wordpress-site/composer.json:/var/www/html/composer.json
+    environment:
+      WP_DB_NAME: db-name
+      WP_DB_USER: db-user
+      WP_DB_PASS: db-pwd
+      WP_DB_HOST: db-container-name
+    networks:
+      - wp-cubix-network
+
+networks:
+  wp-cubix-network:
+    external: true
