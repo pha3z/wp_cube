@@ -1,0 +1,16 @@
+version: '1.0'
+services:
+  wp-mariadb:
+    image: mariadb
+    ports:
+      - 3606:3606
+    volumes:
+      - /opt/wp-cubix/volumes/mariadb-data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: your_root_pwd
+    networks:
+      - wp-cubix-network
+
+networks:
+  wp-cubix-network:
+    external: true
