@@ -1,0 +1,21 @@
+services:
+  houxhandyman-wp:
+    image: wp-cubix
+    container_name: houxhandyman-wp
+    ports:
+      - 80:81
+      - 443:443
+    volumes:
+      - ./volumes/uploads:/var/www/html/wp-content/uploads
+      - ./volumes/composer.json:/var/www/html/composer.json
+    environment:
+      WP_DB_NAME: houxhandymandb
+      WP_DB_USER: houxhandymanuser
+      WP_DB_PASS: ninjagaidan7
+      WP_DB_HOST: wp-mariadb
+    networks:
+      - wp-cubix-network
+
+networks:
+  wp-cubix-network:
+    external: true
