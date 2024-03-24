@@ -4,7 +4,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1
 
 LABEL maintainer="James Houx (@pha3z)"
 LABEL org.opencontainers.image.source https://github.com/pha3z/wp_cubix
-LABEL org.opencontainers.image.description "Wordpress with SQLite and streamlined Wordpress version management."
+LABEL org.opencontainers.image.description "Wordpress with streamlined Wordpress version management."
 
 RUN apt-get update && apt-get install -y \
 	wget \
