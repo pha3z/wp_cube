@@ -3,7 +3,7 @@
 # Exit on error
 set -e
 
-cwd /var/www/html/public
+cd /var/www/html/public
 
 composer install
 
