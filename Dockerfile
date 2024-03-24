@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
 # Install Php Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set the working directory to /var/www/html/public
-WORKDIR /var/www/html/public
+# Set the working directory to /var/www/html
+WORKDIR /var/www/html
 
 # Initialize a new Php Composer project (non-interactive mode)
 RUN export COMPOSER_ROOT_VERSION=1.0.0
@@ -47,9 +47,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
 
-# Copy the startup script into the container
-COPY startup.sh /usr/local/bin/startup.sh
-RUN chmod +x /usr/local/bin/startup.sh
-
-# Use the custom startup script
-CMD ["/usr/local/bin/startup.sh"]
+# serversideup/php requires you to add custom startup script in specific manner
+# https://serversideup.net/open-source/docker-php/docs/guide/adding-your-own-start-up-scripts
+COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/

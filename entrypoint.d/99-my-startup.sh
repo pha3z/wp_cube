@@ -3,7 +3,7 @@
 # Exit on error
 set -e
 
-cd /var/www/html/public
+cd /var/www/html
 
 yes | composer update
 yes | composer install
