@@ -1,7 +1,8 @@
-#!/command/with-contenv bash
-# https://github.com/just-containers/s6-overlay#container-environment
+#!/bin/sh
 # Exit on error
 set -e
+
+echo "Executing wp-cubix startup script..."
 
 cd /var/www/html
 
