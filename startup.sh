@@ -17,7 +17,8 @@ if [ ! -f "config.php" ]; then
 		--dbuser=$WP_DB_USER /
 		--dbpass=$WP_DB_PASS /
 		--dbhost=$WP_DB_HOST /
-		--locale=en_US-en_US 
+		--locale=en_US-en_US /
+		--allow-root 
 else
 	echo "Existing wp-config.php found. Using it."
 fi
