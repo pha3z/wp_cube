@@ -7,7 +7,7 @@ mkdir -p "volumes" 2>/dev/null
 # Create a unique container name based on current timestamp
 TEMP_CONTAINER="temp_container_$(date +%s)"
 IMAGE_NAME="wp-cubix:latest"
-FILE_PATH_IN_CONTAINER="/var/www/html/composer.json"
+FILE_PATH_IN_CONTAINER="/var/www/html/public/composer.json"
 DEST_PATH_ON_HOST="volumes/composer.json"
 
 if [ ! -f "$DEST_PATH_ON_HOST" ]; then

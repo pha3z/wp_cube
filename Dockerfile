@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
 # Install Php Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set the working directory to /var/www/html
-WORKDIR /var/www/html
+# Set the working directory to /var/www/html/public
+WORKDIR /var/www/html/public
 
 # Initialize a new Php Composer project (non-interactive mode)
 RUN export COMPOSER_ROOT_VERSION=1.0.0
