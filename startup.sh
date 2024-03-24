@@ -5,7 +5,8 @@ set -e
 
 cd /var/www/html/public
 
-composer install
+yes | composer update
+yes | composer install
 
 #you can inject explicit PHP into the config file if necessary. see examples here:
 #https://developer.wordpress.org/cli/commands/config/create/
