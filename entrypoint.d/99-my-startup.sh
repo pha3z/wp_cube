@@ -11,7 +11,7 @@ yes | composer install
 
 #you can inject explicit PHP into the config file if necessary. see examples here:
 #https://developer.wordpress.org/cli/commands/config/create/
-if [ ! -f "config.php" ]; then
+if [ ! -f "wp-config.php" ]; then
 	echo "Generating wp-config.php..."
 	wp config create /
 		--dbname=$WP_DB_NAME /
