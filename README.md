@@ -2,7 +2,7 @@
 A containerized WordPress build using composer for automatic updates and version management.
 
 ## Features & Benefits
-- Uses ServerSideUp, a production-grade high-performance Apache & PHP image
+- Uses ServerSideUp, a production-grade high-performance Apache & PHP image.  Read about it here: https://serversideup.net/open-source/docker-php/docs/getting-started/these-images-vs-others
 - Includes WP CLI
 - Composer is pre-initialized in the image.
 - Lightweight backups -- only wp-content/uploads and composer.json need to be mounted to persistent volumes and backed up. Everything else is ephemeral.

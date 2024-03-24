@@ -1,4 +1,4 @@
-FROM serversideup/php:8.2-fpm-apache
+FROM serversideup/php:8.3-fpm-nginx
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
@@ -13,10 +13,11 @@ RUN apt-get update && apt-get install -y \
 	htop \
 	&& rm -rf /var/lib/apt/lists/*
 
+# Install Php Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Set the working directory to /var/www/html
 WORKDIR /var/www/html
-
-#We don't have to install composer because serversideup already includes it
 
 # Initialize a new Php Composer project (non-interactive mode)
 RUN export COMPOSER_ROOT_VERSION=1.0.0
