@@ -1,4 +1,4 @@
-FROM serversideup/php:8.2-fpm-apache
+FROM serversideup/php:beta-8.3-fpm-apache
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
