@@ -9,6 +9,8 @@ cd /var/www/html
 yes | composer update
 yes | composer install
 
+alias wp='wp --allow-root --path=/var/www/html'
+
 #you can inject explicit PHP into the config file if necessary. see examples here:
 #https://developer.wordpress.org/cli/commands/config/create/
 if [ ! -f "wp-config.php" ]; then
@@ -18,8 +20,7 @@ if [ ! -f "wp-config.php" ]; then
 		--dbuser=$WP_DB_USER /
 		--dbpass=$WP_DB_PASS /
 		--dbhost=$WP_DB_HOST /
-		--locale=en_US-en_US /
-		--allow-root 
+		--locale=en_US-en_US 
 else
 	echo "Existing wp-config.php found. Using it."
 fi
