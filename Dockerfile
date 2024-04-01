@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	unzip \
 	htop \
+	vim \
+	net-tools \
+	lsof \
+	ss \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /var/www/html
