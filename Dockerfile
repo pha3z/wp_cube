@@ -19,23 +19,28 @@ WORKDIR /var/www/html
 #We don't have to install composer because serversideup already includes it
 
 # Initialize a new Php Composer project (non-interactive mode)
-RUN export COMPOSER_ROOT_VERSION=1.0.0
-RUN composer init --no-interaction \
-	--name pha3z/wp_cubix \
-	--description "Wordpress streamlined WP version management." \
-	--author "James Houx aka pha3z" \
-	--type project \
-	--homepage "https://github.com/pha3z/wp_cubix"
+#RUN export COMPOSER_ROOT_VERSION=1.0.0
+#RUN composer init --no-interaction \
+#	--name pha3z/wp_cubix \
+#	--description "Wordpress streamlined WP version management." \
+#	--author "James Houx aka pha3z" \
+#	--type project \
+#	--homepage "https://github.com/pha3z/wp_cubix"
 
 #install wordpress with Php Composer
 #johnpblock is the well-known/standardized composer repository for wordpress
-RUN composer config allow-plugins.johnpbloch/wordpress-core-installer true
-RUN composer require johnpbloch/wordpress-core-installer
-RUN composer require johnpbloch/wordpress-core
+#RUN composer config allow-plugins.johnpbloch/wordpress-core-installer true
+#RUN composer require johnpbloch/wordpress-core-installer
+#RUN composer require johnpbloch/wordpress-core
 
 #Add the wpackagist repository, which is where most published WordPress plugins are housed
 #This command adds wpackagist to the repositories listing in the composer.json file
-RUN composer config repositories.wpackagist composer https://wpackagist.org
+#RUN composer config repositories.wpackagist composer https://wpackagist.org
+
+#composer init does nothing more than create a composer.json file in the current directory
+#we're going to use our own preconfigured composer.json instead
+
+COPY ./composer.json /var/www/html
 
 #By default, Php Composer places installed dependencies in a vendor subdirectory.
 #You can configure a different destination for your themes and plugins.

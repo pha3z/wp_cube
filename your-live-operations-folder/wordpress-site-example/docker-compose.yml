@@ -9,9 +9,11 @@ services:
       - ./volumes/uploads:/var/www/html/wp-content/uploads
       - ./volumes/composer.json:/var/www/html/composer.json
     environment:
-      WP_DB_NAME: houxhandymandb
-      WP_DB_USER: houxhandymanuser
-      WP_DB_PASS: ninjagaidan7
+      WP_CONFIG_EXTRA_PHP: "define('HOUX_EXTRA_PHP_TEST', 'SOME VALUE');"
+      WP_DB_NAME: yourdbname
+      WP_DB_USER: yourdbuser
+      WP_DB_PASS: yourdbpwd
+      WP_DB_HOST: wp-mariadb
       WP_DB_HOST: wp-mariadb
     networks:
       - wp-cubix-network

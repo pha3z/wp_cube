@@ -1,0 +1,29 @@
+{
+    "name": "pha3z/wp_cubix",
+    "description": "Wordpress using streamlined WP version management.",
+    "type": "project",
+    "homepage": "https://github.com/pha3z/wp_cubix",
+    "authors": [
+        {
+            "name": "James Houx aka pha3z"
+        }
+    ],
+    "require": {
+        "johnpbloch/wordpress-core-installer": "^2.0",
+        "johnpbloch/wordpress-core": "^6.4"
+    },
+    "extra": {
+        "wordpress-install-dir": "xwordpress"
+    },
+    "config": {
+        "allow-plugins": {
+            "johnpbloch/wordpress-core-installer": true
+        }
+    },
+    "repositories": {
+        "wpackagist": {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    }
+}
