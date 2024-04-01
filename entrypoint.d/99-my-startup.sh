@@ -36,7 +36,6 @@ cd /var/www/html/xwordpress
 echo "Generating wp-config.php..."
 echo "WP_DB_NAME: $WP_DB_NAME"
 echo "WP_DB_USER: $WP_DB_USER"
-echo "WP_DB_PASS: $WP_DB_PASS"
 echo "WP_DB_HOST: $WP_DB_HOST"
 
 wp config create \
