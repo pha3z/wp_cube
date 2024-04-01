@@ -34,12 +34,12 @@ alias wp='wp --allow-root --path=/var/www/html/xwordpress'
 cd /var/www/html/xwordpress
 
 echo "Generating wp-config.php..."
-wp config create /
-	--dbname="$WP_DB_NAME" /
-	--dbuser="$WP_DB_USER" /
-	--dbpass="$WP_DB_PASS" /
-	--dbhost="$WP_DB_HOST" /
-	--locale=en_US-en_US /
+wp config create \
+	--dbname="$WP_DB_NAME" \
+	--dbuser="$WP_DB_USER" \
+	--dbpass="$WP_DB_PASS" \
+	--dbhost="$WP_DB_HOST" \
+	--locale="en_US-en_US" \
 	--extra-php="$WP_CONFIG_EXTRA_PHP"
 
 chmod 440 wp-config.php
