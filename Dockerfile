@@ -1,4 +1,4 @@
-FROM serversideup/php:8.2-fpm-apache
+FROM serversideup/php:8.3-fpm-apache
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
@@ -50,4 +50,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 # serversideup/php requires you to add custom startup script in specific manner
 # https://serversideup.net/open-source/docker-php/docs/guide/adding-your-own-start-up-scripts
-COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
+COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/0
+
+RUN docker-php-serversideup-s6-init
