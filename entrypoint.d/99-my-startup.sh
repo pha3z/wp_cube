@@ -4,13 +4,12 @@ set -e
 
 echo "Executing wp-cubix startup script..."
 
-cd /var/www/html/public
+echo "Setting www-data:www-data as owner on $WP_DIR/wp-content/uploads (assuming you've mounted this folder as a writeable volume)"
 
-echo "Setting www-data:www-data as owner on /var/www/html/public/wp-content/uploads (assuming you've mounted this folder as a writeable volume)"
+chown www-data:www-data $WP_DIR/wp-content/uploads
+chmod 755 $WP_DIR/wp-content/uploads
 
-chown www-data:www-data /var/www/html/public/wp-content/uploads
-chmod 755 /var/www/html/public/wp-content/uploads
-
+cd $HTM_DIR
 export COMPOSER_PROCESS_TIMEOUT=1200
 yes | composer update
 yes | composer install
@@ -18,7 +17,7 @@ yes | composer install
 #wp cli must be run from the wordpress folder
 #moreover, the wp-settings.php and wp-config.php files must both be visible to wp cli within that folder.
 #--allow-root is necessary because the container startup script runs as root. wp cli will throw a big warning/failure if you don't have --allow-root
-alias wp='wp --allow-root --path=/var/www/html/public/xwordpress'
+alias wp='wp --allow-root --path=$WP_DIR'
 
 #about wordpress salts (in wp-config.php): https://kinsta.com/knowledgebase/wordpress-salts/
 #about relocating wp-config.php: https://wordpress.stackexchange.com/questions/58391/is-moving-wp-config-outside-the-web-root-really-beneficial
@@ -37,7 +36,7 @@ alias wp='wp --allow-root --path=/var/www/html/public/xwordpress'
 #4) You can pipe it in from a file: tail -n+2 path/to/file.php | wp core config --extra-php --dbname="lorem" ...
 #So for our case shown below, just add your PHP to WP_CONFIG_EXTRA_PHP as a one-liner in the docker-compose.yml file
 
-cd /var/www/html/public/xwordpress
+cd $WP_DIR
 
 echo "Generating wp-config.php..."
 echo "WP_DB_NAME: $WP_DB_NAME"
