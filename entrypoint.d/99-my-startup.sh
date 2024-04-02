@@ -6,6 +6,11 @@ echo "Executing wp-cubix startup script..."
 
 cd /var/www/html/public
 
+echo "Setting www-data:www-data as owner on /var/www/html/public/wp-content/uploads (assuming you've mounted this folder as a writeable volume)"
+
+chown www-data:www-data /var/www/html/public/wp-content/uploads
+chmod 755 /var/www/html/public/wp-content/uploads
+
 export COMPOSER_PROCESS_TIMEOUT=1200
 yes | composer update
 yes | composer install
