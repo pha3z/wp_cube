@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /var/www/html
-WORKDIR /var/www/html
+WORKDIR /var/www/html/public
 
 #We don't have to install composer because serversideup already includes it
 
@@ -43,7 +43,7 @@ WORKDIR /var/www/html
 #composer init does nothing more than create a composer.json file in the current directory
 #we're going to use our own preconfigured composer.json instead
 
-COPY ./composer.json /var/www/html
+COPY ./composer.json /var/www/html/public
 
 #By default, Php Composer places installed dependencies in a vendor subdirectory.
 #You can configure a different destination for your themes and plugins.

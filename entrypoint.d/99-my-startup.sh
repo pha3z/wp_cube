@@ -12,7 +12,7 @@ yes | composer install
 #wp cli must be run from the wordpress folder
 #moreover, the wp-settings.php and wp-config.php files must both be visible to wp cli within that folder.
 #--allow-root is necessary because the container startup script runs as root. wp cli will throw a big warning/failure if you don't have --allow-root
-alias wp='wp --allow-root --path=/var/www/html/xwordpress'
+alias wp='wp --allow-root --path=/var/www/html/public/xwordpress'
 
 #about wordpress salts (in wp-config.php): https://kinsta.com/knowledgebase/wordpress-salts/
 #about relocating wp-config.php: https://wordpress.stackexchange.com/questions/58391/is-moving-wp-config-outside-the-web-root-really-beneficial
@@ -31,7 +31,7 @@ alias wp='wp --allow-root --path=/var/www/html/xwordpress'
 #4) You can pipe it in from a file: tail -n+2 path/to/file.php | wp core config --extra-php --dbname="lorem" ...
 #So for our case shown below, just add your PHP to WP_CONFIG_EXTRA_PHP as a one-liner in the docker-compose.yml file
 
-cd /var/www/html/xwordpress
+cd /var/www/html/public/xwordpress
 
 echo "Generating wp-config.php..."
 echo "WP_DB_NAME: $WP_DB_NAME"
