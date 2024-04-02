@@ -14,6 +14,8 @@ chmod 777 $WP_DIR/wp-content/uploads
 cd $DOC_ROOT
 export COMPOSER_PROCESS_TIMEOUT=1200
 yes | composer update
+echo "Set vendor to 777"
+chmod 777 vendor
 yes | composer install
 
 #wp cli must be run from the wordpress folder
