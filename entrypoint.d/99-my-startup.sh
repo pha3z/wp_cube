@@ -52,6 +52,7 @@ wp config create \
 	--extra-php="$WP_CONFIG_EXTRA_PHP"
 
 chmod 440 wp-config.php
+chown www-data:www-data wp-config.php
 mv wp-config.php ../../wp-config-super-secret-location.php #renaming the file isn't the point, but we do it cuz we might as well. Moving the file is the point.
 
 #Create a proxy wp-config.php file to process the real wp-config.php
@@ -77,3 +78,5 @@ chown www-data:www-data $WP_DIR/wp-content/uploads
 echo "Setting CHMOD to 755 on $WP_DIR/wp-content/uploads"
 chmod 755 $WP_DIR/wp-content/uploads
 
+echo "Setting www-data:www-data as owner on $DOC_ROOT (recursively)"
+chown -R www-data:www-data $DOC_ROOT
