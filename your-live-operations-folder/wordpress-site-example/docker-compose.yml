@@ -6,9 +6,10 @@ services:
       - 80:81
       - 443:443
     volumes:
-      - ./volumes/uploads:/var/www/html/wp-content/uploads
+      - ./volumes/uploads:/opt/wp-content/uploads
       - ./volumes/composer.json:/var/www/html/composer.json
     environment:
+      WP_UPLOADS_EXTERNAL_DIR: "/opt/wp-content/uploads" 
       DOC_ROOT: "/var/www/html/public"
       WP_DIR: "/var/www/html/public/xwordpress"
       WP_CONFIG_EXTRA_PHP: "define('HOUX_EXTRA_PHP_TEST', 'SOME VALUE');"

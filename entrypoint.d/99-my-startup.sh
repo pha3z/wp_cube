@@ -6,16 +6,12 @@ echo "Executing wp-cubix startup script..."
 
 echo "DOC_ROOT (HTML Directory / Document Root): $DOC_ROOT"
 echo "WP_DIR (Wordpress Directory): $WP_DIR"
-echo "Setting www-data:www-data as owner on $WP_DIR/wp-content/uploads"
-chown www-data:www-data $WP_DIR/wp-content/uploads
-echo "Setting CHMOD to 777 on $WP_DIR/wp-content/uploads"
-chmod 777 $WP_DIR/wp-content/uploads
 
 cd $DOC_ROOT
 export COMPOSER_PROCESS_TIMEOUT=1200
+echo "composer update"
 yes | composer update
-echo "Set vendor to 777"
-chmod 777 vendor
+echo "composer innstall"
 yes | composer install
 
 #wp cli must be run from the wordpress folder
@@ -71,4 +67,13 @@ require_once(MY_WP_PATH . '../../wp-config-super-secret-location.php');
 EOF
 
 chmod 440 wp-config.php
+
+echo "WP_UPLOADS_EXTERNAL_DIR: $WP_UPLOADS_EXTERNAL_DIR"
+echo "Creating symlink: $WP_DIR/wp-content/uploads  TARGET: $WP_UPLOADS_EXTERNAL_DIR"
+ln -s $WP_UPLOADS_EXTERNAL_DIR $WP_DIR/wp-content/uploads 
+
+echo "Setting www-data:www-data as owner on $WP_DIR/wp-content/uploads"
+chown www-data:www-data $WP_DIR/wp-content/uploads
+echo "Setting CHMOD to 755 on $WP_DIR/wp-content/uploads"
+chmod 755 $WP_DIR/wp-content/uploads
 
