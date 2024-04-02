@@ -4,7 +4,7 @@ set -e
 
 echo "Executing wp-cubix startup script..."
 
-cd /var/www/html
+cd /var/www/html/public
 
 yes | composer update
 yes | composer install
