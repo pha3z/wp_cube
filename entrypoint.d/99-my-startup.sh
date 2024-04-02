@@ -11,7 +11,7 @@ echo "Setting www-data:www-data as owner on $WP_DIR/wp-content/uploads (assuming
 chown www-data:www-data $WP_DIR/wp-content/uploads
 chmod 755 $WP_DIR/wp-content/uploads
 
-cd $HTM_DIR
+cd $DOC_ROOT
 export COMPOSER_PROCESS_TIMEOUT=1200
 yes | composer update
 yes | composer install
