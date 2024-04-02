@@ -4,6 +4,8 @@ set -e
 
 echo "Executing wp-cubix startup script..."
 
+echo "DOC_ROOT (HTML Directory / Document Root): $DOC_ROOT"
+echo "WP_DIR (Wordpress Directory): $WP_DIR"
 echo "Setting www-data:www-data as owner on $WP_DIR/wp-content/uploads (assuming you've mounted this folder as a writeable volume)"
 
 chown www-data:www-data $WP_DIR/wp-content/uploads
