@@ -6,6 +6,7 @@ echo "Executing wp-cubix startup script..."
 
 cd /var/www/html/public
 
+export COMPOSER_PROCESS_TIMEOUT=1200
 yes | composer update
 yes | composer install
 
