@@ -2,8 +2,6 @@ services:
   wp-mariadb:
     image: mariadb:11.3.2-jammy
     container_name: wp-mariadb
-    ports:
-      - 3606:3606
     volumes:
       - ./volumes/mariadb-data:/var/lib/mysql
     environment:
