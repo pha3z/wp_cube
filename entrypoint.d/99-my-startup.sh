@@ -65,7 +65,7 @@ if ( !defined('MY_WP_PATH') )
     define('MY_WP_PATH', dirname(__FILE__) . '/');
 
 /** Location of your WordPress configuration. */
-require_once(MY_WP_PATH . '../../wp-config-super-secret-location.php');
+require_once(MY_WP_PATH . '../wp-config-super-secret-location.php');
 ?>
 EOF
 
