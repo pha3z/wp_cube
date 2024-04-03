@@ -13,7 +13,7 @@
         "johnpbloch/wordpress-core": "^6.4"
     },
     "extra": {
-        "wordpress-install-dir": "xwordpress"
+        "wordpress-install-dir": "public"
     },
     "config": {
         "allow-plugins": {
