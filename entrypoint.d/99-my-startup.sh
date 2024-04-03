@@ -5,7 +5,7 @@ set -e
 echo "Executing wp-cubix startup script..."
 
 echo "DOC_ROOT (HTML Directory / Document Root): $DOC_ROOT"
-echo "WP_DIR (Wordpress Directory): $WP_DIR"
+echo "WP_SUBDIR (Wordpress SubDirectory): $WP_SUBDIR"
 
 cd $DOC_ROOT
 export COMPOSER_PROCESS_TIMEOUT=1200
@@ -17,7 +17,7 @@ yes | composer install
 #wp cli must be run from the wordpress folder
 #moreover, the wp-settings.php and wp-config.php files must both be visible to wp cli within that folder.
 #--allow-root is necessary because the container startup script runs as root. wp cli will throw a big warning/failure if you don't have --allow-root
-alias wp='wp --allow-root --path=$WP_DIR'
+alias wp='wp --allow-root --path=$DOC_ROOT/$WP_SUBDIR'
 
 #about wordpress salts (in wp-config.php): https://kinsta.com/knowledgebase/wordpress-salts/
 #about relocating wp-config.php: https://wordpress.stackexchange.com/questions/58391/is-moving-wp-config-outside-the-web-root-really-beneficial
@@ -36,7 +36,7 @@ alias wp='wp --allow-root --path=$WP_DIR'
 #4) You can pipe it in from a file: tail -n+2 path/to/file.php | wp core config --extra-php --dbname="lorem" ...
 #So for our case shown below, just add your PHP to WP_CONFIG_EXTRA_PHP as a one-liner in the docker-compose.yml file
 
-cd $WP_DIR
+cd $DOC_ROOT/$WP_SUBDIR
 
 echo "Generating wp-config.php..."
 echo "WP_DB_NAME: $WP_DB_NAME"
@@ -70,13 +70,27 @@ EOF
 chmod 440 wp-config.php
 
 echo "WP_UPLOADS_EXTERNAL_DIR: $WP_UPLOADS_EXTERNAL_DIR"
-echo "Creating symlink: $WP_DIR/wp-content/uploads  TARGET: $WP_UPLOADS_EXTERNAL_DIR"
-ln -s $WP_UPLOADS_EXTERNAL_DIR $WP_DIR/wp-content/uploads 
+echo "Creating symlink: $DOC_ROOT/$WP_SUBDIR/wp-content/uploads  TARGET: $WP_UPLOADS_EXTERNAL_DIR"
+ln -s $WP_UPLOADS_EXTERNAL_DIR $DOC_ROOT/$WP_SUBDIR/wp-content/uploads 
 
-echo "Setting www-data:www-data as owner on $WP_DIR/wp-content/uploads"
-chown www-data:www-data $WP_DIR/wp-content/uploads
-echo "Setting CHMOD to 755 on $WP_DIR/wp-content/uploads"
-chmod 755 $WP_DIR/wp-content/uploads
+echo "Setting www-data:www-data as owner on $DOC_ROOT/$WP_SUBDIR/wp-content/uploads"
+chown www-data:www-data $DOC_ROOT/$WP_SUBDIR/wp-content/uploads
+echo "Setting CHMOD to 755 on $DOC_ROOT/$WP_SUBDIR/wp-content/uploads"
+chmod 755 $DOC_ROOT/$WP_SUBDIR/wp-content/uploads
 
 echo "Setting www-data:www-data as owner on $DOC_ROOT (recursively)"
 chown -R www-data:www-data $DOC_ROOT
+
+echo "Generating .htaccess folder in $DOC_ROOT to direct traffic to $DOC_ROOT/$WP_SUBDIR"
+echo << EOF > $DOC_ROOT/.htaccess
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^(www.)?${WP_DOMAIN}$
+RewriteCond %{REQUEST_URI} !^/${WP_SUBDIR}/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /${WP_SUBDIR}/\$1
+RewriteCond %{HTTP_HOST} ^(www.)?${WP_DOMAIN}$
+RewriteRule ^(/)?$ ${WP_SUBDIR}/index.php [L] 
+</IfModule>
+EOF
