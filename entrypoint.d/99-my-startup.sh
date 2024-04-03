@@ -71,6 +71,8 @@ EOF
 
 chmod 440 wp-config.php
 
+chown -R www-data:www-data $HOST_DIR/$WP_SUBDIR
+
 echo "WP_UPLOADS_EXTERNAL_DIR: $WP_UPLOADS_EXTERNAL_DIR"
 echo "Creating symlink: $HOST_DIR/$WP_SUBDIR/wp-content/uploads  TARGET: $WP_UPLOADS_EXTERNAL_DIR"
 ln -s $WP_UPLOADS_EXTERNAL_DIR $HOST_DIR/$WP_SUBDIR/wp-content/uploads 
