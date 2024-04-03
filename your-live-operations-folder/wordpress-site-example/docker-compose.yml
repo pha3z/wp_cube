@@ -11,8 +11,6 @@ services:
     environment:
       WP_DOMAIN: yourdomain
       WP_UPLOADS_EXTERNAL_DIR: "/opt/wp-content/uploads" 
-      DOC_ROOT: "/var/www/html/public"
-      WP_SUBDIR: "xwordpress"
       WP_CONFIG_EXTRA_PHP: "define('HOUX_EXTRA_PHP_TEST', 'SOME VALUE');"
       WP_DB_NAME: yourdbname
       WP_DB_USER: yourdbuser
